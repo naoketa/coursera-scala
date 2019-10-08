@@ -21,7 +21,19 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def inner(chars: List[Char], count: Int): Boolean = {
+      if (count < 0) false
+      chars match {
+        case chars if chars.isEmpty => count == 0
+        case chars if chars.head == '(' => inner(chars.tail, count + 1)
+        case chars if chars.head == ')' => inner(chars.tail, count - 1)
+        case _ => inner(chars.tail, count);
+      }
+    }
+
+    inner(chars, 0)
+  }
   
   /**
    * Exercise 3
