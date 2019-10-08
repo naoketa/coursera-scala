@@ -23,11 +23,11 @@ object Main {
    */
   def balance(chars: List[Char]): Boolean = {
     def inner(chars: List[Char], count: Int): Boolean = {
-      if (count < 0) false
+      if (count < 0) return false
       chars match {
         case chars if chars.isEmpty => count == 0
-        case chars if chars.head == '(' => inner(chars.tail, count + 1)
-        case chars if chars.head == ')' => inner(chars.tail, count - 1)
+        case '('::_ => inner(chars.tail, count + 1)
+        case ')'::_ => inner(chars.tail, count - 1)
         case _ => inner(chars.tail, count);
       }
     }
