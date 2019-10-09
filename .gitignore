@@ -5,3 +5,4 @@ target/
 project/
 assignment.sbt
 recfun/build.sbt
+scalastyle/
