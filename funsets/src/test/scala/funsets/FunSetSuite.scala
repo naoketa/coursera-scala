@@ -129,5 +129,17 @@ class FunSetSuite extends FunSuite {
       }
     }
 
-
+  test("filter") {
+    new TestSets {
+      val u1 = union(s1, s2)
+      val u2 = union(u1, s3)
+      val even = filter(u2, _%2 == 0)
+      assert(!contains(even, 1), "Filter 1")
+      assert(contains(even, 2), "Filter 2")
+      assert(!contains(even, 3), "Filter 3")
+    }
   }
+
+
+
+}
