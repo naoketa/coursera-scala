@@ -140,6 +140,28 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("forall") {
+    new TestSets {
+      val u1 = union(s1, s2)
+      val u2 = union(u1, s3)
+      assert(forall(u2, _ < 4), "Filter 1")
+      assert(forall(s2, _%2 == 0), "Filter 2")
+      assert(!forall(u2, _%2 == 0), "Filter 3")
+    }
+
+    new TestSets {
+      val u1 = union(singletonSet(999), singletonSet(1000))
+      assert(forall(u1, _ > 0), "Filter 1")
+      assert(!forall(u1, _ < 1000), "Filter 2")
+    }
+
+    new TestSets {
+      val u1 = union(singletonSet(-999), singletonSet(-1000))
+      assert(forall(u1, _ < -998), "Filter 1")
+      assert(!forall(u1, _ < -1000), "Filter 2")
+    }
+  }
+
 
 
 }
