@@ -144,15 +144,15 @@ class FunSetSuite extends FunSuite {
     new TestSets {
       val u1 = union(s1, s2)
       val u2 = union(u1, s3)
-      assert(forall(u2, _ < 4), "Filter 1")
-      assert(forall(s2, _%2 == 0), "Filter 2")
-      assert(!forall(u2, _%2 == 0), "Filter 3")
+      assert(forall(u2, _ < 4))
+      assert(forall(s2, _ % 2 == 0))
+      assert(!forall(u2, _ % 2 == 0))
     }
 
     new TestSets {
       val u1 = union(singletonSet(999), singletonSet(1000))
-      assert(forall(u1, _ > 0), "Filter 1")
-      assert(!forall(u1, _ < 1000), "Filter 2")
+      assert(forall(u1, _ > 0))
+      assert(!forall(u1, _ < 1000))
     }
 
     new TestSets {
@@ -161,6 +161,15 @@ class FunSetSuite extends FunSuite {
       assert(!forall(u1, _ < -1000), "Filter 2")
     }
   }
+
+    test("exist") {
+      new TestSets {
+        val u1 = union(s1, s2)
+        assert(exists(u1, _ == 1))
+        assert(exists(u1, _ == 2))
+        assert(!exists(u1, _ == 3))
+      }
+    }
 
 
 
