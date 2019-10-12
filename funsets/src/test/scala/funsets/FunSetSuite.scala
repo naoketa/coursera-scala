@@ -119,21 +119,21 @@ class FunSetSuite extends FunSuite {
     }
   }
 
-    test("diff contains all elements that the other doesn't have") {
-      new TestSets {
-        val u1 = union(s1, s2)
-        val u2 = union(s2, s3)
-        val d1 = diff(u1, u2)
-        assert(contains(d1, 1), "Diff 1")
-        assert(!contains(d1, 2), "Diff 2")
-      }
+  test("diff contains all elements that the other doesn't have") {
+    new TestSets {
+      val u1 = union(s1, s2)
+      val u2 = union(s2, s3)
+      val d1 = diff(u1, u2)
+      assert(contains(d1, 1), "Diff 1")
+      assert(!contains(d1, 2), "Diff 2")
     }
+  }
 
   test("filter") {
     new TestSets {
       val u1 = union(s1, s2)
       val u2 = union(u1, s3)
-      val even = filter(u2, _%2 == 0)
+      val even = filter(u2, _ % 2 == 0)
       assert(!contains(even, 1), "Filter 1")
       assert(contains(even, 2), "Filter 2")
       assert(!contains(even, 3), "Filter 3")
@@ -162,23 +162,23 @@ class FunSetSuite extends FunSuite {
     }
   }
 
-    test("exist") {
-      new TestSets {
-        val u1 = union(s1, s2)
-        assert(exists(u1, _ == 1))
-        assert(exists(u1, _ == 2))
-        assert(!exists(u1, _ == 3))
-      }
+  test("exist") {
+    new TestSets {
+      val u1 = union(s1, s2)
+      assert(exists(u1, _ == 1))
+      assert(exists(u1, _ == 2))
+      assert(!exists(u1, _ == 3))
     }
+  }
 
   test("map") {
     new TestSets {
       val u1 = union(s1, s2)
       val u2 = union(s2, s3)
-      assert(!contains(map(u1, _+1), 1))
-      assert(contains(map(u1, _+1), 2))
-      assert(contains(map(u1, _+1), 3))
-      assert(!contains(map(u1, _+1), 4))
+      assert(!contains(map(u1, _ + 1), 1))
+      assert(contains(map(u1, _ + 1), 2))
+      assert(contains(map(u1, _ + 1), 3))
+      assert(!contains(map(u1, _ + 1), 4))
     }
   }
 
