@@ -171,6 +171,15 @@ class FunSetSuite extends FunSuite {
       }
     }
 
-
+  test("map") {
+    new TestSets {
+      val u1 = union(s1, s2)
+      val u2 = union(s2, s3)
+      assert(!contains(map(u1, _+1), 1))
+      assert(contains(map(u1, _+1), 2))
+      assert(contains(map(u1, _+1), 3))
+      assert(!contains(map(u1, _+1), 4))
+    }
+  }
 
 }
