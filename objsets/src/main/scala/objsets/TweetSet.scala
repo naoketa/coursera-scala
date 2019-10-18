@@ -102,6 +102,8 @@ abstract class TweetSet {
     * This method takes a function and applies it to every element in the set.
     */
   def foreach(f: Tweet => Unit): Unit
+
+  def isEmpty: Boolean
 }
 
 class Empty extends TweetSet {
@@ -120,6 +122,8 @@ class Empty extends TweetSet {
   def foreach(f: Tweet => Unit): Unit = ()
 
   def mostRetweeted: Tweet = throw new java.util.NoSuchElementException("mostRetweeted of EmptyList")
+
+  def isEmpty: Boolean = true
 }
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
@@ -154,7 +158,15 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     right.foreach(f)
   }
 
-  def mostRetweeted: Tweet = ???
+  def mostRetweeted: Tweet = {
+    lazy val mostLeft = left.mostRetweeted
+    lazy val mostRight = right.mostRetweeted
+    val mostWithLeft = if (!left.isEmpty && (mostLeft.retweets > this.elem.retweets)) mostLeft else this.elem
+    val mostWithRight = if (!right.isEmpty && (mostRight.retweets > this.elem.retweets)) mostRight else this.elem
+    if (mostWithLeft.retweets > mostWithRight.retweets) mostWithLeft else mostWithRight
+  }
+
+  def isEmpty: Boolean = false
 }
 
 trait TweetList {

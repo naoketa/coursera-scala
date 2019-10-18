@@ -70,6 +70,14 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
+  test("mostRetweeted: with set") {
+    new TestSets {
+      val set = set2.incl(c).incl(d)
+      val actual  = set.mostRetweeted
+      assert(actual.retweets === 20)
+    }
+  }
+
   test("descending: set5") {
     new TestSets {
       val trends = set5.descendingByRetweet
