@@ -74,7 +74,7 @@ abstract class TweetSet {
     * Question: Should we implment this method here, or should it remain abstract
     * and be implemented in the subclasses?
     */
-  def descendingByRetweet: TweetList = ???
+  def descendingByRetweet: TweetList
 
   /**
     * The following methods are already implemented
@@ -124,6 +124,8 @@ class Empty extends TweetSet {
   def mostRetweeted: Tweet = throw new java.util.NoSuchElementException("mostRetweeted of EmptyList")
 
   def isEmpty: Boolean = true
+
+  def descendingByRetweet: TweetList = Nil
 }
 
 class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
@@ -167,6 +169,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
   }
 
   def isEmpty: Boolean = false
+
+  def descendingByRetweet: TweetList = new Cons(this.mostRetweeted, remove(this.mostRetweeted).descendingByRetweet)
 }
 
 trait TweetList {
